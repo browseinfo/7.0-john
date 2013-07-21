@@ -1,0 +1,92 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+from openerp import netsvc
+from openerp.osv import osv
+from openerp.osv import fields
+from openerp.tools.translate import _
+import time
+from datetime import datetime
+
+class insurance_followup_send_mail(osv.osv_memory):
+    _name = 'insurance_followup.send.mail'
+    _description = 'Send Mail to Customers'
+    _columns = {
+        'date': fields.date('Follow-up Sending Date', required=True, 
+                            help="This field allow you to select a forecast date to plan your follow-ups"),
+        'followup_id': fields.many2one('insurance_follwup.followup', 'Follow-Up', required=True, readonly = True),
+        'company_id':fields.related('followup_id', 'company_id', type='many2one',
+                                    relation='res.company', store=True, readonly=True),
+    }
+
+    def _get_followup(self, cr, uid, context=None):
+        if context is None:
+            context = {}
+        if context.get('active_model', 'ir.ui.menu') == 'insurance_follwup.followup':
+            return context.get('active_id', False)
+        company_id = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.id
+        followp_id = self.pool.get('insurance_follwup.followup').search(cr, uid, [('company_id', '=', company_id)], context=context)
+        return followp_id and followp_id[0] or False
+    
+    _defaults = {
+        'date': lambda *a: time.strftime('%Y-%m-%d'),
+        'followup_id': _get_followup,
+    }
+    
+    def do_process(self, cr, uid, ids, context=None):
+        follwup_obj = self.pool.get('insurance.follwup')
+        date_format = "%Y-%m-%d"
+        followup_id = self.browse(cr, uid, ids, context=context)[0].followup_id
+        date = self.browse(cr, uid, ids, context=context)[0].date
+        wiz_date = datetime.strptime(date, date_format)
+        fifty_to_five = [25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45]
+        ten_to_fifty = [11,12,13,14,15]
+        six_to_ten = [6,7,8,9,10]
+        one_to_five = [1,2,3,4,5]
+        one_to_two = [1,2]
+        ten_to_twentytwo = [20,21,22]
+
+        follwup_ids =  follwup_obj.search(cr, uid, [('state', 'in', ['draft', 'open'])], context=context)
+        for followup in follwup_obj.browse(cr, uid, follwup_ids, context=context):
+            wf_service = netsvc.LocalService("workflow")
+            due_date= datetime.strptime(followup.date_due, date_format)
+            delta = wiz_date - due_date
+            gema =  due_date - wiz_date
+            days_before = gema.days
+            day_after = delta.days
+            print "============dddd=====",days_before, day_after
+            for line in followup_id.followup_line:
+                if line.state == 'before':
+                    if days_before in fifty_to_five:
+                        mail_message = self.pool.get('email.template').send_mail(cr,uid,line.email_template_id,followup.id,force_send=True)
+                    elif days_before in ten_to_fifty:
+                        mail_message = self.pool.get('email.template').send_mail(cr,uid,line.email_template_id,followup.id,force_send=True)
+                    elif days_before in six_to_ten:
+                        mail_message = self.pool.get('email.template').send_mail(cr,uid,line.email_template_id,followup.id,force_send=True)
+                    elif days_before in one_to_five:
+                        mail_message = self.pool.get('email.template').send_mail(cr,uid,line.email_template_id,followup.id,force_send=True)
+                if line.state == 'after':
+                    if day_after in one_to_two:
+                        mail_message = self.pool.get('email.template').send_mail(cr,uid,line.email_template_id,followup.id,force_send=True)
+                    elif day_after in ten_to_twentytwo:
+                        mail_message = self.pool.get('email.template').send_mail(cr,uid,line.email_template_id,followup.id,force_send=True)
+                        wf_service.trg_validate(uid, 'insurance.follwup', followup.id, 'insurance_cancel', cr)
+        return True
+insurance_followup_send_mail()

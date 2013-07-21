@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <record model="ir.ui.view" id="view_order_line_tree_inherits">
+        <field name="name">sale.order.line.inherit2</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree"/>
+        <field name="arch" type="xml">
+			<field name="invoiced" position="after">
+				<field name="calculate"/>
+			</field>
+		</field>
+    </record>    
+
+        <record id="view_sales_order_uncalculate_line_filter" model="ir.ui.view">
+            <field name="name">sale.order.uncalculated.line</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Uncalculated Lines">
+                    <filter icon="terp-gtk-go-back-rtl" string="To Do" domain="[('state','=','confirmed')]" name="sale order" help="Confirmed sales order lines, not yet delivered"/>
+                    <filter icon="terp-dialog-close" string="Done" domain="[('state','=','done')]" name="sale_order_done" help="Sales order lines done"/>
+                    <filter icon="terp-dolar_ok!" string="Uninvoiced" name="uninvoiced" domain="[('invoiced','&lt;&gt;', 1),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel')]" help="Sales Order Lines that are confirmed, done or in exception state and haven't yet been invoiced"/>
+                    <separator/>
+                    <filter icon="terp-dolar_ok!" string="Uncalculated" name="uncalculated" domain="[('calculate','=',0)]"/>
+                    <separator/>
+                    <filter string="My Sales Order Lines" icon="terp-personal" domain="[('salesman_id','=',uid)]" help="My Sales Order Lines"/>
+                    <field name="order_id"/>
+                    <field name="order_partner_id" filter_domain="[('order_partner_id', 'child_of', self)]"/>
+                    <field name="product_id"/>
+                    <field name="salesman_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Order" icon="terp-gtk-jump-to-rtl" domain="[]" context="{'group_by':'order_id'}" help="Order reference"/>
+                        <filter string="Product" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'product_id'}"/>
+                        <filter string="Status" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    <record id="action_order_line_spreadsheet" model="ir.actions.act_window">
+        <field name="name">Order Lines for Calculate</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>       
+        <field name="search_view_id" ref="view_sales_order_uncalculate_line_filter"/>
+        <field name="context">{"search_default_uncalculated":1}</field>
+        <field name="domain">[('state','=','draft')]</field>
+    </record>
+	<record model="ir.ui.view" id="view_calculate_line_form">
+		<field name="name">calculate.line.form</field>
+		<field name="model">calculate.line</field>
+		<field name="arch" type="xml">
+            <form string="Calculate Order Lines" version="7.0">
+                <group string="Do you really want to Calculate Order Line(s)?">
+                    <field name="name" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="calculate_order_lines" string="Calculate Lines" type="object"  class="oe_highlight"  />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+		</field>
+	</record>
+    
+    <act_window
+        id="action_order_line_calculate_tree_test"
+        name="Calculate Order Lines"
+        res_model="calculate.line"
+        src_model="sale.order.line"
+        view_mode="form"
+        key2="client_action_multi"
+        target="new"/>
+
+        <menuitem id="menu_action_order_line_spreadsheet" parent="base.menu_invoiced" action="action_order_line_spreadsheet" sequence="20"/>
+        
+        
+		<record id="view_order_price_form_change" model="ir.ui.view">
+			<field name="name">sale.order.form.price.extend</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+		        <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="replace">
+		            <field name="purchase_price" groups="base.group_user"/>
+		            <field name="labor_cost"/>
+		        </xpath>
+		       <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
+		            <field name="purchase_price" groups="base.group_user"/>
+		        </xpath>
+
+			</field>
+		</record>
+    
+	</data>
+</openerp>

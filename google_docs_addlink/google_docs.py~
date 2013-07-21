@@ -1,0 +1,57 @@
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2012 OpenERP SA (<http://www.openerp.com>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+import urllib2
+import logging
+from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
+
+
+class google_docs_addlink(osv.osv):
+    """ Inherits ir attachment and add into sidebar option. """
+    _inherit = 'ir.attachment'
+    
+    def google_doc_url(self, cr, uid, res_model, ids, context=None):
+        '''
+        To add URL in attachment Side bar
+        '''
+        res_id = ids[0]
+        pool_ir_attachment = self.pool.get('ir.attachment')
+        url = context.get("url","")
+        if len(url) ==  0:
+            raise osv.except_osv(_('Error!'), _("Please enter proper URL."))
+        try:
+            result = urllib2.urlopen(url)
+        except:
+                raise osv.except_osv(_('Error!'), _("Please enter Valid URL."))
+        pool_gdoc_config = self.pool.get('google.docs.config')
+        pool_ir_attachment.create(cr, uid, {
+            'res_model': res_model,
+            'res_id': res_id,
+            'type': 'url',
+            'name':  context.get("url","Untitled Document."),
+            'url': context.get("url","Untitled Document."),
+        }, context=context)
+        return {
+                'title': url,
+                'url': url
+                }
+                

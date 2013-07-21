@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="sale_order_line_aeroo_pdf" model="ir.actions.report.xml">
+            <field name="name">Sale Order(PDF)</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">sale.order</field>
+            <field name="report_name">test_report_call</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">oo-ods</field>
+			<field name="out_format" ref="report_aeroo_ooo.report_mimetypes_pdf_ods"/>
+			<field name="content_fname">pdf</field>
+            <field name="parser_loc">project_spreadsheet_extended/report/aeroo_parse.py</field>
+            <field name="report_rml">project_spreadsheet_extended/report/aeroo_report.ods</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+			<field name="process_sep">True</field>
+        </record>
+
+        <record id="sale_order_line_report_aeroo_pdf" model="ir.values">
+            <field name="name">costed_mrp_report_call_pdf</field>
+            <field name="model">sale.order</field>
+            <field eval="'client_print_multi'" name="key2"/>
+            <field eval="'ir.actions.report.xml,' +str(sale_order_line_aeroo_pdf)" name="value_unpickle"/>
+        </record>
+
+		<record id="sale_order_line_aeroo_csv" model="ir.actions.report.xml">
+            <field name="name">Sale Order(CSV)</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">sale.order</field>
+            <field name="report_name">test_report_call_csv</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">oo-ods</field>
+			<field name="out_format" ref="report_aeroo_ooo.report_mimetypes_csv_ods"/>
+			<field name="content_fname">csv</field>
+            <field name="parser_loc">project_spreadsheet_extended/report/aeroo_parse.py</field>
+            <field name="report_rml">project_spreadsheet_extended/report/aeroo_report.ods</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+        </record>
+
+        <record id="sale_order_line_report_aeroo_csv" model="ir.values">
+            <field name="name">sale_order_line_report_aeroo_csv</field>
+            <field name="model">sale.order</field>
+            <field eval="'client_print_multi'" name="key2"/>
+            <field eval="'ir.actions.report.xml,' +str(sale_order_line_aeroo_csv)" name="value_unpickle"/>
+        </record>
+      </data>
+</openerp>

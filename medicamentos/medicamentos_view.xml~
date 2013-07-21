@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="medicamentos_product">
+        <field name="name">medicamentos.form.product.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+          <xpath expr="/form/sheet/notebook/page[@string='Information']/group/group/field[@name='variants']" position="before">
+            <group>
+              <field name="pharmaceuticalform"/>
+              <field name="concentration"/>
+            </group>
+          </xpath>
+          
+          <xpath expr="/form/sheet/notebook/page[@string='Procurements']/group[@name='procurement']" position="inside">
+            <group>
+              <field name="serial_number"/>
+              <field name="expiration_date"/>
+            </group>
+          </xpath>
+          
+        </field>
+      </record>
+
+    </data>
+</openerp>

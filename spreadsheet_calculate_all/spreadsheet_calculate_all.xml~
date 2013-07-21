@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+    <record model="ir.ui.view" id="view_order_form2_inherits">
+        <field name="name">sale.order.inherit2</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+		   <xpath expr="//header" position="inside">
+					<button name="button_calculate" states="draft" string="Calculate All" icon="gtk-execute" type="object" />
+					<button name="insert" states="draft" string="In Bottom" icon="gtk-execute" type="object" />
+
+		   </xpath>
+           <xpath expr="//page[@string='Order Lines']/group[@name='sale_total']" position="inside">
+		   		<field name="tot_volume" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+		   		<field name="avg_volume" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+
+           </xpath>
+			<xpath expr="//sheet/group" position="inside">
+		   		<field name="calculated"/>
+			</xpath>
+		</field>
+    </record>
+        	
+	</data>
+</openerp>
+	

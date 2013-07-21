@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report auto="False" id="account_journal_enrtry_report" model="account.move" name="account.move.report" rml="account/report/account_journal_entry.rml" string="Journal Entry"/>
+    </data>
+</openerp>

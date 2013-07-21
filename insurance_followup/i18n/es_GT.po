@@ -1,0 +1,521 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* insurance_followup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-25 06:09+0000\n"
+"PO-Revision-Date: 2013-06-25 06:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: insurance_followup
+#: sql_constraint:insurance_follwup.followup.line:0
+msgid "Days of the follow-up levels must be different"
+msgstr ""
+
+#. module: insurance_followup
+#: model:email.template,body_html:insurance_followup.email_template_insurance_followup_level_before15
+msgid "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"\n"
+"    <p>Dear ${object.partner_id.name},</p>\n"
+"     <p>\n"
+"    This is the 1st reminder mail before 45 days of your insurance policy that your payment date is ${object.date_due} .\n"
+"    So Would you please make payment before the ${object.date_due}.\n"
+"    </p>\n"
+"<br/>\n"
+"Thank You,\n"
+"<br/>\n"
+"   <br/>\n"
+"${object.user_id.name}\n"
+"\n"
+"\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: insurance_followup
+#: sql_constraint:insurance_follwup.followup:0
+msgid "Only one follow-up per company is allowed"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,date_due:0
+msgid "Payment Date"
+msgstr "Fecha de pago"
+
+#. module: insurance_followup
+#: view:insurance_follwup.followup.line:0
+msgid "days overdue, do the following actions:"
+msgstr ""
+
+#. module: insurance_followup
+#: help:insurance_followup.send.mail,date:0
+msgid "This field allow you to select a forecast date to plan your follow-ups"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance_followup.send.mail,date:0
+msgid "Follow-up Sending Date"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance_followup.send.mail:0
+msgid "Print"
+msgstr ""
+
+#. module: insurance_followup
+#: selection:insurance.follwup,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Contact Information"
+msgstr "Informacion de Contacto"
+
+#. module: insurance_followup
+#: field:insurance_followup.send.mail,followup_id:0
+msgid "Follow-Up"
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.actions.act_window,name:insurance_followup.action_insurance_department
+#: model:ir.ui.menu,name:insurance_followup.menu_insurance_department
+msgid "Department"
+msgstr "Departamento"
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Department Information"
+msgstr "Poliza"
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Other Information ..."
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.model,name:insurance_followup.model_insurance_follwup_followup_line
+msgid "Follow-up Criteria"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,email:0
+msgid "Email"
+msgstr "Correo"
+
+#. module: insurance_followup
+#: model:ir.ui.menu,name:insurance_followup.insurance_followup_send_mail
+msgid "Send Emails"
+msgstr "Correos Enviados"
+
+#. module: insurance_followup
+#: field:insurance_follwup.followup.line,name:0
+msgid "Follow-Up Action"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,state:0
+#: field:insurance_follwup.followup.line,state:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: insurance_followup
+#: model:ir.model,name:insurance_followup.model_insurance_follwup
+msgid "insurance follwup"
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.actions.act_window,name:insurance_followup.action_insurance_follwup_definition_form
+msgid "Payment Follow-ups"
+msgstr ""
+
+#. module: insurance_followup
+#: help:insurance_follwup.followup.line,send_email:0
+msgid "When processing, it will send an email"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,form:0
+msgid "Form"
+msgstr "Forma"
+
+#. module: insurance_followup
+#: field:insurance_follwup.followup.line,delay:0
+msgid "Due Days"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,prime:0
+msgid "Prime"
+msgstr "Monto de la Prima"
+
+#. module: insurance_followup
+#: field:insurance_followup.send.mail,company_id:0
+msgid "unknown"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,company_id:0
+#: field:insurance_follwup.followup,company_id:0
+msgid "Company"
+msgstr "Compania Aseguradora"
+
+#. module: insurance_followup
+#: selection:insurance_follwup.followup.line,state:0
+msgid "After"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+#: selection:insurance.follwup,state:0
+msgid "Paid"
+msgstr ""
+
+#. module: insurance_followup
+#: help:insurance_follwup.followup.line,sequence:0
+msgid "Gives the sequence order when displaying a list of follow-up lines."
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,phone:0
+msgid "Phone"
+msgstr "Telefono"
+
+#. module: insurance_followup
+#: model:email.template,subject:insurance_followup.email_template_insurance_followup_level_after1
+#: model:email.template,subject:insurance_followup.email_template_insurance_followup_level_after22
+#: model:email.template,subject:insurance_followup.email_template_insurance_followup_level_before10
+#: model:email.template,subject:insurance_followup.email_template_insurance_followup_level_before15
+#: model:email.template,subject:insurance_followup.email_template_insurance_followup_level_before45
+#: model:email.template,subject:insurance_followup.email_template_insurance_followup_level_before5
+msgid "${object.user_id.company_id.name} Payment Reminder"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,plan:0
+msgid "Plan"
+msgstr "Plan"
+
+#. module: insurance_followup
+#: model:email.template,body_html:insurance_followup.email_template_insurance_followup_level_after1
+msgid "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"    <p>Dear ${object.partner_id.name},</p>\n"
+"     <p>\n"
+"     This is the last reminder mail for your insurance policy that your payment date is ${object.date_due} which is already due. \n"
+"     So please make the payment as soon as possible otherwise your policy will be cancelled.\n"
+"    </p>\n"
+"<br/>\n"
+"Best Regards,\n"
+"<br/>\n"
+"   <br/>\n"
+"${object.user_id.name}\n"
+"\n"
+"\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,address_id:0
+msgid "Address"
+msgstr "Direccion"
+
+#. module: insurance_followup
+#: field:insurance.follwup,issue_date:0
+msgid "Issue Date"
+msgstr "Fecha de Emision"
+
+#. module: insurance_followup
+#: view:insurance_follwup.followup.line:0
+msgid "Follow-up Steps"
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.ui.menu,name:insurance_followup.menu_insurance_config
+msgid "Configuration"
+msgstr "Configuracion"
+
+#. module: insurance_followup
+#: view:insurance_follwup.followup:0
+msgid "Search Follow-up"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance_follwup.followup.line:0
+#: field:insurance_follwup.followup.line,send_email:0
+msgid "Send an Email"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,partner_id:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Dates"
+msgstr "Fechas"
+
+#. module: insurance_followup
+#: field:insurance.department,name:0
+#: field:insurance.follwup,name:0
+#: field:insurance_follwup.followup,name:0
+msgid "Name"
+msgstr "Nomereo de Pollza"
+
+#. module: insurance_followup
+#: view:insurance_follwup.followup:0
+msgid "To remind customers of paying their Insurance, you can\n"
+"                        define different actions depending on how severely\n"
+"                        overdue the customer is. These actions are bundled\n"
+"                        into follow-up levels that are triggered when the due\n"
+"                        date of an Insurance has passed a certain\n"
+"                        number of days. If there are other overdue Insurance for the \n"
+"                        same customer, the actions of the most \n"
+"                        overdue invoice will be executed."
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance_follwup.followup.line,email_template_id:0
+msgid "Email Template"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,notes:0
+msgid "Notes"
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.model,name:insurance_followup.model_insurance_followup_send_mail
+msgid "Send Mail to Customers"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance_follwup.followup.line,description:0
+msgid "Printed Message"
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.actions.act_window,name:insurance_followup.action_insurance_followup_send_mail
+msgid "Send Follow-Ups"
+msgstr ""
+
+#. module: insurance_followup
+#: help:insurance_follwup.followup.line,delay:0
+msgid "The number of days after the due date of the invoice to wait before sending the reminder.  Could be negative if you want to send a polite alert beforehand."
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,amount:0
+msgid "Amount"
+msgstr "Monto Asegurado"
+
+#. module: insurance_followup
+#: model:ir.actions.act_window,help:insurance_followup.action_insurance_follwup_definition_form
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to define follow-up levels and their related actions.\n"
+"              </p><p>\n"
+"                For each step, specify the actions to be taken and delay in days. It is\n"
+"                possible to use print and e-mail templates to send specific messages to\n"
+"                the customer.\n"
+"              </p>\n"
+"          "
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Other Information"
+msgstr "Otra Informacion"
+
+#. module: insurance_followup
+#: selection:insurance.follwup,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance_followup.send.mail:0
+msgid "Send follow-ups"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance_follwup.followup.line,followup_id:0
+msgid "Follow Ups"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,expiry_date:0
+msgid "CREDIT CARD EXPIRATION DATE"
+msgstr "Fecha de Expiracion de Tarjeta de Credito"
+
+#. module: insurance_followup
+#: view:insurance_followup.send.mail:0
+msgid "This action will send follow-up emails, print the letters and\n"
+"                        set the manual actions per customer, according to the follow-up levels defined."
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.ui.menu,name:insurance_followup.menu_insurance_follwup_perent
+msgid "Insurance Follow-Up"
+msgstr ""
+
+#. module: insurance_followup
+#: model:email.template,body_html:insurance_followup.email_template_insurance_followup_level_after22
+msgid "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"\n"
+"    <p>Dear ${object.partner_id.name},</p>\n"
+"    <p>\n"
+"    You didn’t make the payment after 22 days of the payment date, So your insurance policy is cancelled.\n"
+"    </p>\n"
+"<br/>\n"
+"Best Regards,\n"
+"<br/>\n"
+"   <br/>\n"
+"${object.user_id.name}\n"
+"\n"
+"\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.department:0
+#: field:insurance.follwup,department_id:0
+msgid "Insurance Department"
+msgstr "Ramo"
+
+#. module: insurance_followup
+#: field:insurance.department,code:0
+msgid "Code"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,surname:0
+msgid "Surname"
+msgstr "Nombre Completo"
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Set to Draft"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance_follwup.followup.line,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+#: selection:insurance.follwup,state:0
+msgid "Open"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance_followup.send.mail:0
+msgid "or"
+msgstr ""
+
+#. module: insurance_followup
+#: model:email.template,body_html:insurance_followup.email_template_insurance_followup_level_before10
+#: model:email.template,body_html:insurance_followup.email_template_insurance_followup_level_before45
+#: model:email.template,body_html:insurance_followup.email_template_insurance_followup_level_before5
+msgid "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"\n"
+"    <p>Dear ${object.partner_id.name},</p>\n"
+"    <p>\n"
+"    This is the 1st reminder mail before 45 days of your insurance policy that your payment date is ${object.date_due} .\n"
+"    So Would you please make payment before the ${object.date_due}.\n"
+"    </p>\n"
+"<br/>\n"
+"Thank You,\n"
+"<br/>\n"
+"   <br/>\n"
+"${object.user_id.name}\n"
+"\n"
+"\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,user_id:0
+msgid "Agent"
+msgstr "Agente"
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+msgid "Public Information"
+msgstr "Informacion General"
+
+#. module: insurance_followup
+#: field:insurance.follwup,sum_insured:0
+msgid "SUM INSURED"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,payment_frequency:0
+msgid "FREQUENCY OF PAYMENT"
+msgstr "Frecuencia de Pago"
+
+#. module: insurance_followup
+#: view:insurance_followup.send.mail:0
+msgid "Send emails"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance_follwup.followup:0
+#: field:insurance_follwup.followup,followup_line:0
+msgid "Follow-up"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.follwup:0
+#: view:insurance_followup.send.mail:0
+msgid "Cancel"
+msgstr ""
+
+#. module: insurance_followup
+#: model:ir.ui.menu,name:insurance_followup.insurance_follwup_menu_sub
+msgid "Follow-up Levels"
+msgstr "Fases de Seguimiento"
+
+#. module: insurance_followup
+#: model:ir.model,name:insurance_followup.model_insurance_department
+msgid "Insurance  Department"
+msgstr ""
+
+#. module: insurance_followup
+#: field:insurance.follwup,no_of_policy:0
+msgid "Number of Policy"
+msgstr ""
+
+#. module: insurance_followup
+#: view:insurance.department:0
+#: view:insurance.follwup:0
+#: model:ir.actions.act_window,name:insurance_followup.action_Insurance_Insurance
+#: model:ir.ui.menu,name:insurance_followup.menu_insurance_perent
+#: model:ir.ui.menu,name:insurance_followup.menu_insurance_sub
+msgid "Insurance"
+msgstr "Seguros"
+
+#. module: insurance_followup
+#: model:ir.model,name:insurance_followup.model_insurance_follwup_followup
+msgid "Insurance Follow-up"
+msgstr ""
+
+#. module: insurance_followup
+#: selection:insurance_follwup.followup.line,state:0
+msgid "Before"
+msgstr ""
+

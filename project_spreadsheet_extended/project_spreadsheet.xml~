@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		<record model="ir.ui.view" id="view_extend_tree">
+			<field name="name">sale.extends.tree</field>
+			<field name="model">sale.extends</field>
+			<field name="arch" type="xml">
+				<tree string="Project Detail">
+					<field name="code" />
+					<field name="task_desc" />
+					<field name="prod_qty" />
+					<field name="uom_id" />
+
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="view_extend_form">
+			<field name="name">sale.extends.form</field>
+			<field name="model">sale.extends</field>
+			<field name="arch" type="xml">
+				<form string="Project Detail">
+					<field name="code" />
+					<field name="task_desc" />
+					<field name="prod_qty" />
+					<field name="uom_id" />
+
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="view_order_form2_inherit">
+			<field name="name">sale.order.inherit2</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//sheet/group" position="inside">
+					<field name="doctype" />
+					<field name="factor" attrs="{'invisible': [('doctype','=','doc')]}" />
+					<field name="labor_factor" attrs="{'invisible': [('doctype','=','doc')]}" />
+					<field name="document" attrs="{'invisible': [('doctype','=','factor')]}" />
+					<field name="squre_meter" />
+					<field name="distance" />
+					<field name="type"/>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record id="view_order_extend_form_change" model="ir.ui.view">
+			<field name="name">sale.order.form.sale.extend</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/header" position="inside">
+					<button name="button_calculate" states="draft" string="Calculate" icon="gtk-execute" type="object" />
+				</xpath>
+
+				<xpath expr="//page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/group/group/field[@name='product_id']" position="after">
+					<field name="time_factor" invisible="1"/>
+				</xpath>
+		        <!--xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="replace">
+		            <field name="purchase_price" groups="base.group_user"/>
+		        </xpath>
+		       <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
+		            <field name="purchase_price" groups="base.group_user"/>
+		        </xpath-->
+				<xpath expr="//page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/div/field[@name='invoice_lines']" position="after">
+					<label for="extend_ids" />
+					<field name="extend_ids"/>
+				</xpath>
+
+				<xpath expr="//page[@string='Order Lines']/field[@name='order_line']/tree[@string='Sales Order Lines']/field[@name='price_subtotal']" position="after">
+					<button name="button_calculate" states="draft" type="object" icon="gtk-execute" help="Compute Sale Price Based on Factor" />
+				</xpath>
+				<xpath expr="//page[@string='Order Lines']/field[@name='order_line']/tree[@string='Sales Order Lines']/field[@name='price_subtotal']" position="before">
+					<field name="time_factor" sum="Total time factor" invisible="1"/>
+					<field name="labor_cost"  sum="Total Labor Cost"/>
+				</xpath>
+
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="view_order_line_extend_inherit">
+			<field name="name">sale.order.line.extend.inherit</field>
+			<field name="model">sale.order.line</field>
+			<field name="inherit_id" ref="sale.view_order_line_form2" />
+			<field name="arch" type="xml">
+				<field name="product_id" position="after">
+					<field name="extend_ids"/>
+				</field>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.ui.view" id="product_form_view_document">
+			<field name="name">product.product.document</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='cost_method']" position="before">
+					<field name="time_factor" />
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>
+

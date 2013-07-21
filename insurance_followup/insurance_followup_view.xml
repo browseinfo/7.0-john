@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Top menu item -->
+        <menuitem name="Insurance" id="base.menu_tools_Insurance" sequence="130" />
+        
+   <!-- Tree view  -->
+        <record model="ir.ui.view" id="view_insurance_department_tree">
+        <field name="name">insurance.department.tree</field>
+        <field name="model">insurance.department</field>
+        <field name="arch" type="xml">
+            <tree string="Insurance Department">
+                <field name="name"/>
+                <field name="code" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view  -->
+    <record model="ir.ui.view" id="view_insurance_department_form">
+        <field name="name">insurance.department.form</field>
+        <field name="model">insurance.department</field>
+        <field name="arch" type="xml">
+            <form string="Insurance" version="7.0">
+                <group>
+                    <field name="name"/>
+                    <field name="code" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action  -->
+        <record model="ir.actions.act_window" id="action_insurance_department">
+        <field name="name">Department</field>
+        <field name="res_model">insurance.department</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu  -->
+    <menuitem name="Configuration" parent="base.menu_tools_Insurance" id="menu_insurance_config" sequence="16"/>
+
+    <menuitem name="Department" parent="menu_insurance_config" id="menu_insurance_department" action="action_insurance_department" />
+
+    <!-- Tree view  -->
+        <record model="ir.ui.view" id="view_insurance_follwup_tree">
+        <field name="name">insurance.follwup.tree</field>
+        <field name="model">insurance.follwup</field>
+        <field name="arch" type="xml">
+            <tree string="Insurance">
+                <field name="name"/>
+                <field name="issue_date" />
+                <field name="date_due" />
+                <field name="state"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view  -->
+    <record model="ir.ui.view" id="view_insurance_follwup_form">
+        <field name="name">insurance.follwup.form</field>
+        <field name="model">insurance.follwup</field>
+        <field name="arch" type="xml">
+            <form string="Insurance" version="7.0">
+                <header>
+                    <button name="insurance_open" string="Open" states="draft" class="oe_highlight"/>
+                    <button name="insurance_paid" string="Paid" states="open" class="oe_highlight"/>
+                    <button name="insurance_cancel" string="Cancel" states="open" class="oe_highlight"/>
+                    <button name="insurance_draft" string="Set to Draft" states="cancel"  class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,close"/>
+                </header>
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="partner_id" />
+                        <field name="user_id" />
+                    </group>
+                    <notebook>
+                            <page string="Public Information">
+                                <group>
+                                    <group string="Contact Information">
+                                        <field name="surname" />
+                                        <field name="address_id" />
+                                        <field name="email" widget="email"/>
+                                        <field name="phone"/>
+                                    </group>
+                                    <group string="Department Information">
+                                        <field name="department_id" />
+                                        <field name="company_id"/>
+                                        <field name="amount"/>
+                                    </group>
+                                    <group string="Dates" >
+                                        <field name="issue_date" />
+                                        <field name="date_due" />
+                                        <field name="expiry_date" />
+                                    </group>
+                                    <group string="Other Information" >
+                                        <field name="payment_frequency" />
+                                        <field name="prime" />
+                                        <field name="form" />
+                                        <field name="plan" />
+                                    </group>
+                                </group>
+                                <field name="notes" placeholder="Other Information ..." colspan="4"/>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action  -->
+        <record model="ir.actions.act_window" id="action_Insurance_Insurance">
+        <field name="name">Insurance</field>
+        <field name="res_model">insurance.follwup</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu  -->
+    <menuitem name="Insurance" parent="base.menu_tools_Insurance" id="menu_insurance_perent" sequence="3"/>
+
+    <menuitem name="Insurance" parent="menu_insurance_perent" id="menu_insurance_sub" action="action_Insurance_Insurance" />
+    
+    <!-- Insurance Follow-up   --> 
+        <record id="view_insurance_followup_followup_line_tree" model="ir.ui.view">
+            <field name="name">insurance_follwup.followup.line.tree</field>
+            <field name="model">insurance_follwup.followup.line</field>
+            <field name="arch" type="xml">
+                <tree string="Follow-up Steps" >
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="delay"/>
+                     <field name="state"/>
+                    <field name="send_email"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_insurance_follwup_followup_line_form" model="ir.ui.view">
+            <field name="name">insurance_follwup.followup.line.form</field>
+            <field name="model">insurance_follwup.followup.line</field>
+            <field name="arch" type="xml">
+                <form string="Follow-up Steps" version="7.0">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                    <div class="oe_inline">
+                       <field name="state" class="oe_inline"/><field name="delay" class="oe_inline"/> days overdue, do the following actions:
+                    </div>
+                    <div>
+                        <field name="send_email" class="oe_inline"/>
+                        <label for="send_email"/>
+                    </div>
+                   <group>
+                        <field name="sequence"/>
+                   </group>
+                    <group string="Send an Email" attrs="{'invisible': [('send_email', '=', False)]}">
+                        <field name="email_template_id" attrs="{'required': [('send_email', '&lt;&gt;', False)]}"/>
+                    </group>
+
+                    <group >
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_insurance_follwup_followup_form" model="ir.ui.view">
+            <field name="name">insurance_follwup.followup.form</field>
+            <field name="model">insurance_follwup.followup</field>
+            <field name="arch" type="xml">
+                <form string="Follow-up" version="7.0">
+                    <h1><field name="company_id" widget="selection" class="oe_inline"/></h1>
+                    <p class="oe_grey">
+                        To remind customers of paying their Insurance, you can
+                        define different actions depending on how severely
+                        overdue the customer is. These actions are bundled
+                        into follow-up levels that are triggered when the due
+                        date of an Insurance has passed a certain
+                        number of days. If there are other overdue Insurance for the 
+                        same customer, the actions of the most 
+                        overdue invoice will be executed. 
+                    </p>
+                    <field name="followup_line"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_insurance_follwup_followup_tree" model="ir.ui.view">
+            <field name="name">insurance_follwup.followup.tree</field>
+            <field name="model">insurance_follwup.followup</field>
+            <field name="arch" type="xml">
+                <tree string="Follow-up">
+                    <field name="company_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_insurance_follwup_filter" model="ir.ui.view">
+            <field name="name">insurance_follwup.select</field>
+            <field name="model">insurance_follwup.followup</field>
+            <field name="arch" type="xml">
+                <search string="Search Follow-up">
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_insurance_follwup_definition_form" model="ir.actions.act_window">
+            <field name="name">Payment Follow-ups</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">insurance_follwup.followup</field>
+            <field name="search_view_id" ref="view_insurance_follwup_filter"/>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define follow-up levels and their related actions.
+              </p><p>
+                For each step, specify the actions to be taken and delay in days. It is
+                possible to use print and e-mail templates to send specific messages to
+                the customer.
+              </p>
+          </field>
+        </record>
+        
+        <menuitem name="Insurance Follow-Up" parent="base.menu_tools_Insurance" id="menu_insurance_follwup_perent" sequence="10"/>
+        
+        <menuitem action="action_insurance_follwup_definition_form" id="insurance_follwup_menu_sub" parent="menu_insurance_follwup_perent" name="Follow-up Levels"/>
+
+
+
+    </data>
+</openerp>

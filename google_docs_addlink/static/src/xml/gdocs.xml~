@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<head>
+<script>
+function point()
+{
+console.log(":::::::>>>>>>>>>>",this);
+document.getElementById("msg").focus();
+}
+</script>
+</head>
+<t t-name="AddGoogleDocumentItem1">
+     <li onload="point()">
+        <input type="textbox" default_focus="1"  placeholder="Eg: https://www.google.com" id="msg"></input>
+            <button class="oe_sidebar_add_google_button" id="Get">ADD</button>
+      </li>
+</t>
+</templates>

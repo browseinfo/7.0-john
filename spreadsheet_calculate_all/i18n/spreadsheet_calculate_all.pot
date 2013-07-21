@@ -1,0 +1,61 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* spreadsheet_calculate_all
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 8.0alpha1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-18 18:49+0000\n"
+"PO-Revision-Date: 2013-06-18 18:49+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spreadsheet_calculate_all
+#: view:sale.order:0
+msgid "Calculate All"
+msgstr ""
+
+#. module: spreadsheet_calculate_all
+#: view:sale.order:0
+msgid "In Bottom"
+msgstr ""
+
+#. module: spreadsheet_calculate_all
+#: code:addons/spreadsheet_calculate_all/spreadsheet_calculate_all.py:83
+#, python-format
+msgid "Please Insert Factor Value."
+msgstr ""
+#. module: spreadsheet_calculate_all
+#: field:sale.order,avg_volume:0
+msgid "Average Volume"
+msgstr ""
+#. module: spreadsheet_calculate_all
+#: code:addons/spreadsheet_calculate_all/spreadsheet_calculate_all.py:88
+#, python-format
+msgid "Please give google spreadsheet title."
+msgstr ""
+#. module: spreadsheet_calculate_all
+#: code:addons/spreadsheet_calculate_all/spreadsheet_calculate_all.py:121
+#, python-format
+msgid "Authenticate with Google Spreadsheet Fail Please see Configuration in Setting/User/Syncronization."
+msgstr ""
+#. module: spreadsheet_calculate_all
+#: field:sale.order,tot_volume:0
+msgid "Total Volume"
+msgstr ""
+#. module: spreadsheet_calculate_all
+#: code:addons/spreadsheet_calculate_all/spreadsheet_calculate_all.py:83
+#: code:addons/spreadsheet_calculate_all/spreadsheet_calculate_all.py:88
+#: code:addons/spreadsheet_calculate_all/spreadsheet_calculate_all.py:121
+#, python-format
+msgid "User Error!"
+msgstr ""
+#. module: spreadsheet_calculate_all
+#: model:ir.model,name:spreadsheet_calculate_all.model_sale_order
+msgid "Sales Order"
+msgstr ""
